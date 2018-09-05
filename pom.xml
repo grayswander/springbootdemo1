@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>net.grayswander.demo</groupId>
+    <artifactId>spring-boot-demo-1</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!--<packaging>war</packaging>-->
+
+    <properties>
+        <java.version>1.8</java.version>
+        <maven.build.timestamp.format>yyyyMMddHHmmssSSS</maven.build.timestamp.format>
+        <docker.image.prefix>mb-sbd</docker.image.prefix>
+    </properties>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.2.RELEASE</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-jar-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--<archive>-->
+                        <!--<manifest>-->
+                            <!--<mainClass>net.grayswander.demo.springbootdemo1.Application</mainClass>-->
+                        <!--</manifest>-->
+                    <!--</archive>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <classifier>spring-boot</classifier>
+                            <mainClass>
+                                net.grayswander.demo.springbootdemo1.Application
+                            </mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.microsoft.azure</groupId>
+                <artifactId>azure-webapp-maven-plugin</artifactId>
+                <version>1.1.0</version>
+                <configuration>
+                    <authentication>
+                        <serverId>azure-auth</serverId>
+                    </authentication>
+                    <resourceGroup>matrix-rg-2</resourceGroup>
+                    <!--<appName>maven-linux-app-${maven.build.timestamp}</appName>-->
+                    <appName>matrix-sbd-1</appName>
+                    <region>westeurope</region>
+                    <!--<containerSettings>-->
+                        <!--<imageName>${docker.image.prefix}/${project.artifactId}</imageName>-->
+                    <!--</containerSettings>-->
+                    <!--<appSettings>-->
+                        <!--<property>-->
+                            <!--<name>PORT</name>-->
+                            <!--<value>8080</value>-->
+                        <!--</property>-->
+                    <!--</appSettings>-->
+                    <!--<deploymentType>war</deploymentType>-->
+                    <javaVersion>1.8</javaVersion>
+                </configuration>
+            </plugin>
+
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-assembly-plugin</artifactId>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<phase>package</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>single</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<archive>-->
+                                <!--<manifest>-->
+                                    <!--<mainClass>-->
+                                        <!--net.grayswander.demo.springbootdemo1.Application-->
+                                    <!--</mainClass>-->
+                                <!--</manifest>-->
+                            <!--</archive>-->
+                            <!--<descriptorRefs>-->
+                                <!--<descriptorRef>jar-with-dependencies</descriptorRef>-->
+                            <!--</descriptorRefs>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
+        </plugins>
+
+
+    </build>
+
+</project>
