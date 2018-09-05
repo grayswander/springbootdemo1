@@ -23,6 +23,7 @@ public class DebugRestController {
     ) {
 
 
+
         Map<String, Object> response_map = new HashMap<String, Object>() {{
             put("parameters", parameters);
             put("headers", headers);
@@ -32,6 +33,7 @@ public class DebugRestController {
 //            put("principal", principal);
 //            put("authentication", authentication);
 //            put("userdetails", authentication.getPrincipal());
+            put("custom_v1", "Custom Data");
         }};
 
 
